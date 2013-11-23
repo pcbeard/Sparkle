@@ -201,7 +201,10 @@
 
 - (void)abortUpdateWithError:(NSError *)error
 {
-	NSAlert *alert = [NSAlert alertWithMessageText:SULocalizedString(@"Update Error!", nil) defaultButton:SULocalizedString(@"Cancel Update", nil) alternateButton:nil otherButton:nil informativeTextWithFormat:[error localizedDescription]];
+	NSAlert *alert = [[NSAlert new] autorelease];
+	[alert setMessageText:SULocalizedString(@"Update Error!", nil)];
+	[alert setInformativeText:[error localizedDescription]];
+	[alert addButtonWithTitle:SULocalizedString(@"Cancel Update", nil)];
 	[self showModalAlert:alert];
 	[super abortUpdateWithError:error];
 }
